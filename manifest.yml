@@ -1,0 +1,20 @@
+modules:
+  jira:issuePanel:
+    - key: checklist-panel
+      resource: main
+      render: native
+      title: Checklists
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+permissions:
+  scopes:
+    - read:jira-work
+    - write:jira-work
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/1928b593-f521-47f9-8a8f-94943e547129

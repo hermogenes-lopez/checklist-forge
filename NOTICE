@@ -1,0 +1,5 @@
+Checklists for Jira (Forge) is a port of "jira-checklist-plugin"
+(https://github.com/samid737/jira-checklist-plugin), an Atlassian Connect app
+by samid737, licensed under the Apache License, Version 2.0.
+The original stored checklists in the Jira issue entity property "todos";
+this port preserves that property and data shape for full compatibility.
