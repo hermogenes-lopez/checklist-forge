@@ -13,7 +13,7 @@
  */
 import React, { useEffect, useState } from 'react';
 import ForgeReconciler, {
-  Text, Strong, Textfield, Button, Checkbox, Stack, Inline, SectionMessage,
+  Text, Strong, Textfield, Button, Checkbox, Stack, Inline, SectionMessage, Form,
 } from '@forge/react';
 import { requestJira, view } from '@forge/bridge';
 
@@ -78,8 +78,12 @@ const App = () => {
     const text = draft.trim();
     if (!text) return;
     setDraft('');
-    // Same semantics as the original: item text is the key, so a duplicate replaces.
-    persist(items.filter((i) => i.text !== text).concat({ text, done: false }));
+    // Same semantics as the original: item text is the object key, so re-adding an
+    // existing item keeps its position and resets it to not-done.
+    const exists = items.some((i) => i.text === text);
+    persist(exists
+      ? items.map((i) => (i.text === text ? { ...i, done: false } : i))
+      : items.concat({ text, done: false }));
   };
   const toggle = (idx) => persist(items.map((i, n) => (n === idx ? { ...i, done: !i.done } : i)));
   const remove = (idx) => persist(items.filter((_, n) => n !== idx));
@@ -118,16 +122,18 @@ const App = () => {
         <Text>No checklist items yet.</Text>
       )}
 
-      <Inline space="space.100" alignBlock="center">
-        <Textfield
-          name="newItem"
-          placeholder="Add an item and press Enter"
-          value={draft}
-          onChange={(e) => setDraft(String(e.target.value || ''))}
-          onKeyDown={(e) => { if (e.key === 'Enter') add(); }}
-        />
-        <Button appearance="primary" isDisabled={busy || !draft.trim()} onClick={add}>Add</Button>
-      </Inline>
+      {/* UI Kit's Textfield has no onKeyDown, so Enter-to-add goes through Form's onSubmit. */}
+      <Form onSubmit={add}>
+        <Inline space="space.100" alignBlock="center">
+          <Textfield
+            name="newItem"
+            placeholder="Add an item and press Enter"
+            value={draft}
+            onChange={(e) => setDraft(String(e.target.value || ''))}
+          />
+          <Button type="submit" appearance="primary" isDisabled={busy || !draft.trim()}>Add</Button>
+        </Inline>
+      </Form>
     </Stack>
   );
 };
