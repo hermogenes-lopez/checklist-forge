@@ -120,7 +120,7 @@ Not submitted to the Marketplace yet. This section will be filled in after revie
 
 ```bash
 npm install -g @forge/cli && forge login
-git clone https://github.com/hermohjlp-debug/checklist-forge.git && cd checklist-forge && npm install
+git clone https://github.com/hermogenes-lopez/checklist-forge.git && cd checklist-forge && npm install
 forge register            # registers a copy under your own developer account
 forge deploy -e development
 forge install -e development --site <your-site>.atlassian.net --product jira --confirm-scopes
