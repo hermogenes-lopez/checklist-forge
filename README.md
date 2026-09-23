@@ -21,7 +21,7 @@ what you will run into. The code next to it is the long version.
 | Runtime dependencies | 12 (Express, ACE, Sequelize, sqlite3, hbs, …) | 3 (`@forge/react`, `@forge/bridge`, `react`) |
 | App code | 489 lines across 10 files | 141 lines in 1 file |
 | Egress | Your server plus three CDNs | Zero. Eligible for the Runs on Atlassian badge |
-| Revenue share (paid apps) | 25 % | 0 % up to $1M lifetime after migration |
+| Revenue share (paid apps) | 20 %, rising to 25 % on 1 Oct 2026 | 0 % up to $1M lifetime Forge revenue, then 17 % |
 
 ## What the app does
 
